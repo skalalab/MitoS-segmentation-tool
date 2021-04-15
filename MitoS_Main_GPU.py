@@ -149,7 +149,7 @@ class Control:
 
             for img in img_list:
 
-                if ".tif" in img:
+                if ".tiff" in img:
                     img = cv2.imread(path + os.sep + img, cv2.IMREAD_GRAYSCALE)
                     y = img.shape[0]
                     x = img.shape[1]

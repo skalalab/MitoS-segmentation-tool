@@ -33,7 +33,7 @@ from keras.preprocessing.image import ImageDataGenerator
 class Preprocess:
 
     def __init__(self, train_path="train" + os.sep + "image", label_path="train" + os.sep + "label",
-                 raw_path = "train" + os.sep + "RawImgs", img_type="tif"):
+                 raw_path = "train" + os.sep + "RawImgs", img_type="tiff"):
 
         """
         Using glob to get all .img_type form path
@@ -239,7 +239,7 @@ class Augment:
     def __init__(self, path, shear_range, rotation_range, zoom_range, brightness_range, horizontal_flip, vertical_flip,
                  width_shift_range, height_shift_range, train_path="train" + os.sep + "image", label_path="train" + os.sep + "label",
                  raw_path = "train" + os.sep + "RawImgs", merge_path="merge", aug_merge_path="aug_merge",
-                 aug_train_path="aug_train", aug_label_path="aug_label", img_type="tif", weights_path="weights",
+                 aug_train_path="aug_train", aug_label_path="aug_label", img_type="tiff", weights_path="weights",
                  aug_weights_path="aug_weights"):
 
         """
@@ -365,7 +365,7 @@ class Augment:
 
         # checks if number of files in train and label folder are equal
         if len(trains) != len(labels) or len(trains) == 0 or len(trains) == 0:
-            print("Number of train images does match number of label images.\nAborting")
+            print("Number of train images doesn't match number of label images.\nAborting")
             exit()
 
         # iterate through folder, merge label, original images and save to merged folder
@@ -373,7 +373,7 @@ class Augment:
 
             print(image)
 
-            x_t = cv2.imread(path_train + os.sep  + image, cv2.IMREAD_GRAYSCALE)
+            x_t = cv2.imread(path_train + os.sep  + image, cv2.IMREAD_GRAYSCALE) 
             x_l = cv2.imread(path_label + os.sep  + image, cv2.IMREAD_GRAYSCALE)
 
             # exclude image tiles without any labels
@@ -440,7 +440,7 @@ class Augment:
         aug_params_file.close()
 
 
-    def doAugmentate(self, img, save_to_dir, save_prefix, imgnum , batch_size=1, save_format='tif'):
+    def doAugmentate(self, img, save_to_dir, save_prefix, imgnum , batch_size=1, save_format='tiff'):
 
         """
         augment images
@@ -517,7 +517,7 @@ class Augment:
 class Create_npy_files(Preprocess):
 
     def __init__(self, path, data_path="aug_train", label_path="aug_label", weight_path="aug_weights",
-                 npy_path="npydata", img_type="tif"):
+                 npy_path="npydata", img_type="tiff"):
 
         Preprocess.__init__(self, train_path="train" + os.sep + "image", label_path="train" + os.sep + "label",
                             raw_path = "train" + os.sep + "RawImgs", img_type=img_type)
@@ -546,7 +546,10 @@ class Create_npy_files(Preprocess):
         print('Creating training images...')
         print('-' * 30)
 
-        imgs = glob.glob(self.data_path + os.sep + "*" + os.sep + "*")
+        path_images = self.data_path + os.sep + "*" + os.sep + "*"
+        print("path imgs: {path_images}")
+        imgs = glob.glob(path_images)
+
         print(imgs)
 
         imgdatas = np.ndarray((len(imgs), out_rows, out_cols, 1), dtype=np.uint8)

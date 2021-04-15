@@ -471,7 +471,7 @@ class MitoSegNet:
             # if any("_" in s for s in imgs):
             for img in imgs:
 
-                if "_" in img and ".tif" in img:
+                if "_" in img and ".tiff" in img:
 
                     # split file path without filename
                     img_edited = img.split(os.sep)[:-1]
@@ -484,7 +484,7 @@ class MitoSegNet:
 
                     os.rename(img, img_edited_path + os.sep + img_name)
 
-            imgs = glob.glob(test_path + os.sep + "*.tif")
+            imgs = glob.glob(test_path + os.sep + "*.tiff")
             imgs.sort(key=natural_keys)
 
             # create list of images that correspond to arrays in npy file
@@ -499,7 +499,7 @@ class MitoSegNet:
 
                     temp_str = os.sep.join(part[:-1])
 
-                    if ".tif" in part[-1]:
+                    if ".tiff" in part[-1]:
 
                         mod_imgs.append(temp_str + os.sep + str(c) + "_" + part[-1])
 
@@ -510,7 +510,7 @@ class MitoSegNet:
 
             for imgname in imgs:
 
-                if ".tif" in imgname:
+                if ".tiff" in imgname:
 
                     print(imgname)
 
@@ -599,7 +599,7 @@ class MitoSegNet:
 
             # split file path without filename
 
-            if ".tif" in img:
+            if ".tiff" in img:
 
                 img_name = img.split(os.sep)[-1]
                 img_name = img_name.split("_")[1]
