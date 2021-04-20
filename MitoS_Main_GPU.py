@@ -29,6 +29,10 @@ from MitoS_Train_Predict_GPU import *
 from MitoS_Train_Val_Analyser import *
 import warnings
 
+print("added flag for eagerly")
+## https://github.com/tensorflow/probability/issues/519
+tf.config.experimental_run_functions_eagerly(True)
+
 # ignore general deprecation warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
