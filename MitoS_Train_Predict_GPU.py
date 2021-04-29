@@ -372,7 +372,12 @@ class MitoSegNet:
 
         print("\nCopy the line below into the terminal, press enter and click on the link to evaluate the training "
               "performance:\n\ntensorboard --logdir=" + self.path + os.sep + "logs/\n")
-
+        
+        ### ECG see if this solves 
+        # https://github.com/tensorflow/tensorflow/issues/34944
+        tf.config.experimental_run_functions_eagerly(True)
+        ###
+        
         model.fit(x=x, y=imgs_mask_train, batch_size=batch_size, epochs=epochs, verbose=1,
                             validation_split=0.2, shuffle=True, callbacks=callbacks)
 
