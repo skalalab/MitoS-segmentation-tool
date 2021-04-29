@@ -413,7 +413,7 @@ class Augment:
 
 
                 # write final merged image
-                aug_img = aug_img.astype('uint8')
+                aug_img = aug_img.astype('uint32')
                 cv2.imwrite(path_merge + os.sep + image, aug_img)
 
                 img = aug_img
@@ -552,9 +552,9 @@ class Create_npy_files(Preprocess):
 
         print(imgs)
 
-        imgdatas = np.ndarray((len(imgs), out_rows, out_cols, 1), dtype=np.uint8)
-        imglabels = np.ndarray((len(imgs), out_rows, out_cols, 1), dtype=np.uint8)
-        imgweights = np.ndarray((len(imgs), out_rows, out_cols, 1), dtype=np.uint8)
+        imgdatas = np.ndarray((len(imgs), out_rows, out_cols, 1), dtype=np.uint32)
+        imglabels = np.ndarray((len(imgs), out_rows, out_cols, 1), dtype=np.uint32)
+        imgweights = np.ndarray((len(imgs), out_rows, out_cols, 1), dtype=np.uint32)
 
         width = out_cols
         height = out_rows
