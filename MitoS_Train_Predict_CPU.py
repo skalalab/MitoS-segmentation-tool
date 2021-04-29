@@ -489,7 +489,7 @@ class MitoSegNet:
                     c += 1
 
 
-            imgdatas = np.ndarray((len(imgs) * n_tiles, tile_size, tile_size, 1), dtype=np.uint32)
+            imgdatas = np.ndarray((len(imgs) * n_tiles, tile_size, tile_size, 1), dtype=np.uint8)
 
             for imgname in imgs:
 
@@ -721,7 +721,7 @@ class MitoSegNet:
                 current_img[current_img > 0.5] = 255
                 current_img[current_img <= 0.5] = 0
 
-                current_img = current_img.astype(np.uint32)
+                current_img = current_img.astype(np.uint8)
 
                 label_image, num_features = label(current_img)
 
@@ -752,7 +752,7 @@ class MitoSegNet:
                     cv2.resizeWindow('Original', int(x / f), int(y / f))
                     cv2.moveWindow("Original", int(0.5 * x_res), int(0.1 * y_res))
 
-                    cv2.imshow("Prediction", new_image.astype(np.uint32))
+                    cv2.imshow("Prediction", new_image.astype(np.uint8))
 
                     org_img = cv2.imread(test_path + os.sep + org_img_list[org_img_list_index])
                     cv2.imshow("Original", org_img)
